@@ -23,6 +23,40 @@ const ResumeEditorPage: React.FC = () => {
     mode: 'onChange',
   });
 
+  // Auto-save functionality
+  const { saveNow, hasUnsavedChanges } = useAutoSave({
+    enabled: !!user,
+    delay: 30000, // 30 seconds
+    onSave: async (content) => {
+      // TODO: Implement actual save logic
+      console.log('Auto-saving resume:', content);
+      setLastSaved(new Date());
+    },
+  });
+
+  // Listen for auto-save events
+  useEffect(() => {
+    const handleAutoSaved = (e: CustomEvent) => {
+      setLastSaved(e.detail.timestamp);
+    };
+
+    const handleSaveError = (e: CustomEvent) => {
+      console.error('Save error:', e.detail.error);
+    };
+
+    window.addEventListener('resumeAutoSaved', handleAutoSaved as EventListener);
+    window.addEventListener('resumeSaved', handleAutoSaved as EventListener);
+    window.addEventListener('resumeAutoSaveError', handleSaveError as EventListener);
+    window.addEventListener('resumeSaveError', handleSaveError as EventListener);
+
+    return () => {
+      window.removeEventListener('resumeAutoSaved', handleAutoSaved as EventListener);
+      window.removeEventListener('resumeSaved', handleAutoSaved as EventListener);
+      window.removeEventListener('resumeAutoSaveError', handleSaveError as EventListener);
+      window.removeEventListener('resumeSaveError', handleSaveError as EventListener);
+    };
+  }, []);
+
   useEffect(() => {
     if (!user) {
       navigate('/login');
