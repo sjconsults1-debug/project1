@@ -87,8 +87,11 @@ const ResumeEditorPage: React.FC = () => {
   }, [methods.watch, updateContent]);
 
   const handleSave = async () => {
-    // TODO: Implement save functionality
-    setLastSaved(new Date());
+    try {
+      await saveNow();
+    } catch (error) {
+      console.error('Manual save failed:', error);
+    }
   };
 
   const handleExport = async (format: 'pdf' | 'docx') => {
