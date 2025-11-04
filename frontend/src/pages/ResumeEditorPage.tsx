@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useForm, FormProvider } from 'react-hook-form';
 import { useResume } from '../contexts/ResumeContext';
 import { useAuth } from '../contexts/AuthContext';
 import ResumeEditor from '../components/ResumeEditor';
 import ResumePreview from '../components/ResumePreview';
 import { Save, Download, Eye, EyeOff, Sparkles } from 'lucide-react';
+import { ResumeContent } from '../../../shared/types';
 
 const ResumeEditorPage: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
