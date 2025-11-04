@@ -12,10 +12,15 @@ const ResumeEditorPage: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { currentResume, setCurrentResume, isEditing, setIsEditing } = useResume();
+  const { currentContent, updateContent } = useResume();
   const [showPreview, setShowPreview] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const methods = useForm<ResumeContent>({
+    defaultValues: currentContent,
+    mode: 'onChange',
+  });
 
   useEffect(() => {
     if (!user) {
