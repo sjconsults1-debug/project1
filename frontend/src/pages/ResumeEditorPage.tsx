@@ -35,11 +35,21 @@ const ResumeEditorPage: React.FC = () => {
       setTimeout(() => {
         setIsLoading(false);
       }, 1000);
-    } else {
-      // Create new resume
-      setIsEditing(true);
     }
-  }, [id, user, navigate, setIsEditing]);
+  }, [id, user, navigate]);
+
+  useEffect(() => {
+    // Update form when resume content changes
+    methods.reset(currentContent);
+  }, [currentContent, methods.reset]);
+
+  useEffect(() => {
+    // Update resume content when form changes
+    const subscription = methods.watch((value) => {
+      updateContent(value as ResumeContent);
+    });
+    return () => subscription.unsubscribe();
+  }, [methods.watch, updateContent]);
 
   const handleSave = async () => {
     // TODO: Implement save functionality
