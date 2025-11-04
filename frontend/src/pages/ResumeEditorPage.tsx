@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useResume } from '../contexts/ResumeContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useAutoSave } from '../hooks/useAutoSave';
 import ResumeEditor from '../components/ResumeEditor';
 import ResumePreview from '../components/ResumePreview';
 import { Save, Download, Eye, EyeOff, Sparkles } from 'lucide-react';
