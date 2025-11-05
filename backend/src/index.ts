@@ -75,6 +75,7 @@ app.use('/api/templates', templateRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/export', exportRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/sharing', sharingRoutes);
 
 // Error handling middleware
 app.use(notFoundHandler);
