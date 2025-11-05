@@ -191,6 +191,13 @@ const ResumeEditor: React.FC = () => {
         </div>
       </section>
 
+      {/* AI Assistant for Summary */}
+      <AIAssistant
+        section="summary"
+        content={watch('summary')}
+        onResumeUpdate={(newContent) => setValue('summary', newContent)}
+      />
+
       {/* Work Experience */}
       <section className="card">
         <div className="card-header">
