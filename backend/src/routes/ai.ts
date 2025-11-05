@@ -2,6 +2,7 @@ import express from 'express';
 import { body, validationResult } from 'express-validator';
 import { authenticate, AuthRequest } from '../middleware/auth';
 import { aiService } from '../services/aiService';
+import { jobMatchingService } from '../services/jobMatchingService';
 import { PrismaClient } from '@prisma/client';
 
 const router = express.Router();
