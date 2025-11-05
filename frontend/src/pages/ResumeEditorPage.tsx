@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useAutoSave } from '../hooks/useAutoSave';
 import ResumeEditor from '../components/ResumeEditor';
 import ResumePreview from '../components/ResumePreview';
-import { Save, Download, Eye, EyeOff, Sparkles } from 'lucide-react';
+import { Save, Download, Eye, EyeOff, Sparkles, FileText, Loader2 } from 'lucide-react';
 import { ResumeContent } from '../../../shared/types';
 
 const ResumeEditorPage: React.FC = () => {
