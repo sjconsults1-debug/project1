@@ -18,6 +18,8 @@ const ResumeEditorPage: React.FC = () => {
   const [showPreview, setShowPreview] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
 
   const methods = useForm<ResumeContent>({
     defaultValues: currentContent,
