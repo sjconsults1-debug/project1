@@ -8,6 +8,7 @@ import ResumeEditor from '../components/ResumeEditor';
 import ResumePreview from '../components/ResumePreview';
 import { Save, Download, Eye, EyeOff, Sparkles, FileText, Loader2 } from 'lucide-react';
 import { ResumeContent } from '../../../shared/types';
+import { exportService } from '../services/exportService';
 
 const ResumeEditorPage: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
