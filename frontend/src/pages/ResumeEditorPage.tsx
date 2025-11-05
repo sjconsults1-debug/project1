@@ -209,18 +209,40 @@ const ResumeEditorPage: React.FC = () => {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => handleExport('pdf')}
-                  className="btn-primary flex items-center"
+                  disabled={isExporting}
+                  className="btn-primary flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Download className="h-4 w-4 mr-2" />
+                  {isExporting ? (
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  ) : (
+                    <FileText className="h-4 w-4 mr-2" />
+                  )}
                   Export PDF
                 </button>
                 <button
                   onClick={() => handleExport('docx')}
-                  className="btn-outline flex items-center"
+                  disabled={isExporting}
+                  className="btn-outline flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Download DOCX
+                  <Download className="h-4 w-4 mr-2" />
+                  DOCX
+                </button>
+                <button
+                  onClick={() => handleExport('txt')}
+                  disabled={isExporting}
+                  className="btn-outline flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <FileText className="h-4 w-4 mr-2" />
+                  TXT
                 </button>
               </div>
+
+              {/* Export Error */}
+              {exportError && (
+                <div className="text-sm text-red-600 max-w-xs">
+                  {exportError}
+                </div>
+              )}
             </div>
           </div>
         </div>
