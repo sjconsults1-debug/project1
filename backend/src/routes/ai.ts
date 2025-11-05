@@ -308,4 +308,78 @@ router.get('/usage', async (req: AuthRequest, res, next) => {
   }
 });
 
+// Job matching
+router.post('/match', [
+  body('resumeContent').isObject().withMessage('Resume content is required'),
+  body('jobDescription').isObject().withMessage('Job description is required'),
+], async (req: AuthRequest, res, next) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors.array(),
+      });
+    }
+
+    const { resumeContent, jobDescription } = req.body;
+
+    const matchResult = await jobMatchingService.matchResume(resumeContent, jobDescription);
+
+    // Save job match if resumeId is provided
+    if (req.body.resumeId) {
+      await prisma.jobMatch.create({
+        data: {
+          resumeId: req.body.resumeId,
+          score: matchResult.overallScore,
+          matchedSkills: matchResult.matchedSkills,
+          missingSkills: matchResult.missingSkills,
+          recommendations: matchResult.recommendations,
+        }
+      });
+    }
+
+    res.json({
+      success: true,
+      data: matchResult
+    });
+  } catch (error) {
+    console.error('Job matching error:', error);
+    next(error);
+  }
+});
+
+// Get improvement suggestions
+router.post('/improvements', [
+  body('resumeContent').isObject().withMessage('Resume content is required'),
+  body('jobDescription').isObject().withMessage('Job description is required'),
+], async (req: AuthRequest, res, next) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors.array(),
+      });
+    }
+
+    const { resumeContent, jobDescription } = req.body;
+
+    const improvements = await jobMatchingService.suggestImprovements(resumeContent, jobDescription);
+
+    res.json({
+      success: true,
+      data: {
+        improvements,
+        totalImprovements: improvements.length
+      }
+    });
+  } catch (error) {
+    console.error('Improvements error:', error);
+    next(error);
+  }
+});
+
 export default router;
