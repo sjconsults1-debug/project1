@@ -4,6 +4,7 @@ import { analyticsService } from '../services/analyticsService';
 import { PrismaClient } from '@prisma/client';
 
 const router = express.Router();
+const prisma = new PrismaClient();
 
 // All analytics routes require authentication
 router.use(authenticate);
