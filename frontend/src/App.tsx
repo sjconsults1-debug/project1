@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import ResumeEditorPage from './pages/ResumeEditorPage';
 import TemplatesPage from './pages/TemplatesPage';
+import AnalyticsPage from './pages/AnalyticsPage';
 import { AuthProvider } from './contexts/AuthContext';
 import { ResumeProvider } from './contexts/ResumeContext';
 import './App.css';
