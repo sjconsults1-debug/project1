@@ -3,6 +3,7 @@ import { useForm, useFormContext } from 'react-hook-form';
 import { useResume } from '../contexts/ResumeContext';
 import { ResumeContent } from '../../../shared/types';
 import { User, Briefcase, GraduationCap, Award, Code, FolderOpen, Plus, Trash2 } from 'lucide-react';
+import AIAssistant from './AIAssistant';
 
 const ResumeEditor: React.FC = () => {
   const { currentContent, updateContent } = useResume();
