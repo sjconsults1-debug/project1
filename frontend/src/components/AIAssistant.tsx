@@ -12,7 +12,8 @@ import {
   ChevronDown,
   Copy,
   ThumbsUp,
-  ThumbsDown
+  ThumbsDown,
+  Target
 } from 'lucide-react';
 
 interface AIAssistantProps {
