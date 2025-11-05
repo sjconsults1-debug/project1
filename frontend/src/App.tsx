@@ -39,6 +39,7 @@ function App() {
                   <Route path="/dashboard" element={<DashboardPage />} />
                   <Route path="/editor/:id?" element={<ResumeEditorPage />} />
                   <Route path="/templates" element={<TemplatesPage />} />
+                  <Route path="/analytics" element={<AnalyticsPage />} />
                 </Routes>
               </main>
             </div>
