@@ -13,6 +13,7 @@ import templateRoutes from './routes/template';
 import aiRoutes from './routes/ai';
 import exportRoutes from './routes/export';
 import analyticsRoutes from './routes/analytics';
+import sharingRoutes from './routes/sharing';
 
 // Load environment variables
 dotenv.config();
