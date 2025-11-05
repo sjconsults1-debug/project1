@@ -97,9 +97,50 @@ const ResumeEditorPage: React.FC = () => {
     }
   };
 
-  const handleExport = async (format: 'pdf' | 'docx') => {
-    // TODO: Implement export functionality
-    console.log(`Exporting as ${format}`);
+  const handleExport = async (format: 'pdf' | 'docx' | 'txt') => {
+    if (!id) {
+      setExportError('Please save your resume before exporting');
+      return;
+    }
+
+    setIsExporting(true);
+    setExportError(null);
+
+    try {
+      const exportRequest = {
+        resumeId: id,
+        format,
+        options: {
+          customFileName: `${currentContent.personalInfo.firstName}_${currentContent.personalInfo.lastName}_Resume`
+        }
+      };
+
+      const response = await exportService.exportResume(exportRequest);
+
+      // Trigger download
+      await exportService.downloadFile(response.exportId);
+
+      // Show success message
+      window.dispatchEvent(new CustomEvent('notification', {
+        detail: {
+          type: 'success',
+          message: `Resume exported as ${format.toUpperCase()} successfully!`
+        }
+      }));
+    } catch (error: any) {
+      console.error('Export failed:', error);
+      const errorMessage = error.response?.data?.error || error.message || 'Export failed';
+      setExportError(errorMessage);
+
+      window.dispatchEvent(new CustomEvent('notification', {
+        detail: {
+          type: 'error',
+          message: errorMessage
+        }
+      }));
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   if (isLoading) {
