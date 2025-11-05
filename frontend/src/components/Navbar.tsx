@@ -31,6 +31,7 @@ const Navbar: React.FC = () => {
     { name: 'Home', href: '/', icon: Home },
     { name: 'Templates', href: '/templates', icon: Layout },
     { name: 'Dashboard', href: '/dashboard', icon: FileCheck },
+    { name: 'Analytics', href: '/analytics', icon: BarChart3 },
   ];
 
   const isActive = (path: string) => location.pathname === path;
