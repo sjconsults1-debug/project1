@@ -11,7 +11,8 @@ import {
   Home,
   Layout,
   FileCheck,
-  Sparkles
+  Sparkles,
+  BarChart3
 } from 'lucide-react';
 
 const Navbar: React.FC = () => {
